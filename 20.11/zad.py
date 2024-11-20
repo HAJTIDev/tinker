@@ -39,7 +39,13 @@ def save_as_file():
     )
     if file_path:
         try:
-            
+            with open(file_path, "w", encoding="utf-8") as file:
+                content=text_area.get(1.0, tk.END)
+                file.write(content)
+                root.title(f"Notatnik - {os.path.basename(file_path)}")
+                messagebox.showinfo("Zapisano", "Plik został zapisany pomyślnie")
+        except Exception as e:
+            messagebox.showerror("Błąd", f"Nie można zapisać pliku: {e}")
 root=tk.Tk()
 root.title("Notatnik")
 root.geometry("800x600")
