@@ -16,7 +16,30 @@ def open_file():
     else:
         messagebox.showerror("Błąd", f"Nie można otworzyć pliku: {e}")
         return
-
+def close_file():
+    root.title("Notatnik")
+    text_area.delete(1.0, tk.END)
+    return
+def save_file():
+    if hasattr(save_file, "file path") and save_file.file_path:
+        try:
+            with open(save_file.file_path, "w", encoding="utf-8") as file:
+                content=text_area.get(1.0, tk.END)
+                file.write(content)
+            messagebox.showinfo("zapisano", "plik został zapisany pomyślnie")
+        except Exception as e:
+            messagebox.showerror("Błąd", f"Nie można zapisać pliku: {e}")
+        else:
+            save_as_file()
+def save_as_file():
+    file_path=filedialog.asksaveasfilename(
+        defeaultextension=".txt",
+        filetypes=[("All Files","*.*"),("Text Documents","*.txt")],
+        title="Zapisz jako"
+    )
+    if file_path:
+        try:
+            
 root=tk.Tk()
 root.title("Notatnik")
 root.geometry("800x600")
@@ -32,7 +55,7 @@ file_menu.add_command(label="Otwórz", command=open_file)
 file_menu.add_command(label="Zapisz")
 file_menu.add_command(label="Zapisz jako")
 file_menu.add_separator()
-file_menu.add_command(label="Zakończ")
+file_menu.add_command(label="Zakończ", command=close_file)
 file_menu.add_separator()
 file_menu.add_command(label="Wyjdz", command=root.quit)
 menu_bar.add_cascade(label="Plik", menu=file_menu)
