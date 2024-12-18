@@ -17,11 +17,14 @@ class mainn:
         frame_left.place(x=10,y=10,width=260,height=200)
         
         tk.Label(frame_left,text="imie",bg="#B0C4DE").grid(row=0,column=0,sticky="w",pady=5)
-        tk.Entry(frame_left).grid(row=0,column=1,pady=5)
+        self.imie_entry = tk.Entry(frame_left)
+        self.imie_entry.grid(row=0,column=1,pady=5)
         tk.Label(frame_left,text="nazwisko",bg="#B0C4DE").grid(row=1,column=0,sticky="w",pady=5)
-        tk.Entry(frame_left).grid(row=1,column=1,pady=5)
+        self.nazwisko_entry = tk.Entry(frame_left)
+        self.nazwisko_entry.grid(row=1,column=1,pady=5)
         tk.Label(frame_left,text="Stanowisko",bg="#B0C4DE").grid(row=2,column=0,sticky="w",pady=5)
-        ttk.Combobox(frame_left,values=["Kierownik","Starszy Programista","Młodszy Programista","Tester"]).grid(row=2,column=1,pady=5)
+        self.stanowisko_combobox = ttk.Combobox(frame_left,values=["Kierownik","Starszy Programista","Młodszy Programista","Tester"])
+        self.stanowisko_combobox.grid(row=2,column=1,pady=5)
         
         frame_right=tk.LabelFrame(self.root,text="Generowanie hasła", bg="#B0C4DE")
         frame_right.place(x=350,y=10,width=280,height=200)
@@ -34,7 +37,7 @@ class mainn:
         tk.Checkbutton(frame_right,text="znaki specjalne",bg="#B0C4DE",variable=self.include_special).grid(row=3,column=0,sticky="w",pady=5)
         tk.Button(frame_right,text="Generuj",bg="#4682B4", command=self.generatepass).grid(row=4,column=0,columnspan=2,pady=5)
         
-        tk.Button(root,text="Zatwierdz",width=20,bg="#4682B4").place(x=233,y=240)
+        tk.Button(root,text="Zatwierdz",width=20,bg="#4682B4", command=self.zatwierdz).place(x=233,y=240)
         
     def generatepass(self):
         rangeOfNum = int(self.length_entry.get())
@@ -53,7 +56,15 @@ class mainn:
                 allChars += string.punctuation
             for _ in range(rangeOfNum):
                 temp += random.choice(allChars)
+            self.generated_password = temp
             messagebox.showinfo("Wygenerowane hasło", temp)
+    
+    def zatwierdz(self):
+        imie = self.imie_entry.get()
+        nazwisko = self.nazwisko_entry.get()
+        stanowisko = self.stanowisko_combobox.get()
+        
+        messagebox.showinfo("Dane pracownika", f"Imię: {imie}\nNazwisko: {nazwisko}\nStanowisko: {stanowisko}\nHasło: {self.generated_password}")
         
 def main():
     root = tk.Tk()
