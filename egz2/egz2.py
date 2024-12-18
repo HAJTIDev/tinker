@@ -48,4 +48,9 @@ entry_miasto.grid(row=2, column=1)
 
 btn_zatwierdz = tk.Button(root, text="Zatwierdź", font=("Arial", 10))
 btn_zatwierdz.place(x=200, y=220, width=270, height=30)
+
+    
+
+
+
 root.mainloop()
