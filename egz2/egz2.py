@@ -8,7 +8,7 @@ def oblicz_cene():
     elif rodzaj.get() == "List":
         cena.set("Cena: 1,5 zł")
     elif rodzaj.get() == "Paczka":
-        cena.set("Cena: 2,0 zł")
+        cena.set("Cena: 10,0 zł")
 root = tk.Tk()
 root.title("Nadaj Przesyłkę")
 root.geometry("500x300")
@@ -34,12 +34,12 @@ frame2.place(x=200, y=20, width=270, height=180)
 
 tk.Label(frame2, text="Ulica z numerem").grid(row=0, column=0, sticky="w")
 entry_ulica = tk.Entry(frame2, width=25)
-entry_ulica.insert(0, "Konopnickiej 98")
+entry_ulica.insert(0, "")
 entry_ulica.grid(row=0, column=1)
 
 tk.Label(frame2, text="Kod pocztowy").grid(row=1, column=0, sticky="w")
 entry_kod = tk.Entry(frame2, width=25)
-entry_kod.insert(0, "65124")
+entry_kod.insert(0, "")
 entry_kod.grid(row=1, column=1)
 
 tk.Label(frame2, text="Miasto").grid(row=2, column=0, sticky="w")
